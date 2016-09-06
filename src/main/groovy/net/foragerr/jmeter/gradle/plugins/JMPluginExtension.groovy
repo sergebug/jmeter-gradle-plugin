@@ -11,6 +11,7 @@ class JMPluginExtension {
     Boolean ignoreErrors = null
     Boolean ignoreFailures = null
     Boolean remote = false
+    Boolean enableDashboards = null  // maps to -e -o
     Boolean enableReports = null
     Boolean enableExtendedReports = null
 

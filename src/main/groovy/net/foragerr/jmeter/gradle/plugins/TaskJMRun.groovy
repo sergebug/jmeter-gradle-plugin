@@ -82,6 +82,11 @@ public class TaskJMRun extends DefaultTask {
                 args.add("-r");
             }
 
+            if (project.jmeter.enableDashboards) {
+                args.add("-e");
+                args.addAll(Arrays.asList("-o", project.jmeter.reportDir))
+            }
+
             log.info("JMeter is called with the following command line arguments: " + args.toString());
             JMSpecs specs = new JMSpecs();
             specs.getUserSystemProperties().addAll(userSysProps);
@@ -90,7 +95,11 @@ public class TaskJMRun extends DefaultTask {
             specs.getSystemProperties().put("saveservice_properties", System.getProperty("saveservice_properties"));
             specs.getSystemProperties().put("upgrade_properties", System.getProperty("upgrade_properties"));
             specs.getSystemProperties().put("log_file", project.jmeter.jmLog);
-            specs.getSystemProperties().put("jmeter.save.saveservice.output_format", "xml");
+            if (project.jmeter.enableDashboards) {
+                specs.getSystemProperties().put("jmeter.save.saveservice.output_format", "csv");
+            } else {
+                specs.getSystemProperties().put("jmeter.save.saveservice.output_format", "xml");
+            }
             specs.getJmeterProperties().addAll(args);
             specs.setMaxHeapSize(project.jmeter.maxHeapSize.toString());
             specs.setMinHeapSize(project.jmeter.minHeapSize.toString());

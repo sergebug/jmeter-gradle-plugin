@@ -29,12 +29,15 @@ class TaskJMInit extends DefaultTask {
 
         project.jmeter.reportDir = project.jmeter.reportDir ?: new File(buildDir, "jmeter-report")
 
+        //project.jmeter.dashboardDir = project.jmeter.dashboardDir == null ? true: project.jmeter.reportDir
+
         project.jmeter.jmLog = project.jmeter.jmLog ?:  new File(project.jmeter.reportDir, "jmeter.log")
 
         project.jmeter.testFileDir = project.jmeter.testFileDir == null ? new File(project.getProjectDir(), "src/test/jmeter") : project.jmeter.testFileDir;
 
         project.jmeter.ignoreErrors = project.jmeter.ignoreErrors == null ? true : project.jmeter.ignoreErrors
         project.jmeter.ignoreFailures = project.jmeter.ignoreFailures == null ? true : project.jmeter.ignoreFailures
+        project.jmeter.enableDashboards = project.jmeter.enableDashboards == null ? false : project.jmeter.enableDashboards
         project.jmeter.enableReports = project.jmeter.enableReports == null ? false : project.jmeter.enableReports
         project.jmeter.enableExtendedReports = project.jmeter.enableExtendedReports == null ? true : project.jmeter.enableExtendedReports
         LoadPluginProperties()
